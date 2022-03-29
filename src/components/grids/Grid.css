@@ -1,0 +1,17 @@
+.grid {
+    display: inline-block;
+    border: 2px solid lightslategray;
+    border-radius: 5px;
+    width: 20px;
+    height: 20px;
+    background-color: whitesmoke;
+    margin: 0 0 0 1px;
+}
+
+.grid.selected {
+    background-color: greenyellow;
+}
+
+.test {
+    background-color: black;
+}
