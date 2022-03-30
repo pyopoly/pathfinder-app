@@ -1,0 +1,13 @@
+/* .container {
+    display: inline-block;
+    margin: 0 auto;
+    background-color: aqua;
+} */
+
+.start_icon {
+    /* display: table; */
+    background-color: green;
+    height: 15px;
+    width: 15px;
+    margin: 0 auto
+}

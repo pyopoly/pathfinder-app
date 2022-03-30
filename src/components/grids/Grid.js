@@ -1,15 +1,16 @@
+import { Children } from 'react';
 import './Grid.css';
+// import StartIcon from '../icons/StartIcon';
 // import { useState, useContext } from 'react';
 
-const Grid = ({ gridMap, gridIdx, appStates:[setStartIdx, setGoalIdx, setStartGoalSwitch, startIdx, goalIdx, startGoalSwitch]}) => {
+const Grid = ({ children, gridMap, gridIdx, mousedownRef, appStates:[setStartIdx, setGoalIdx, setStartGoalSwitch, startIdx, goalIdx, startGoalSwitch, [notification, notify]]}) => {
   // const [selectedStart, setSelectedStart] = useState(false);
   // const [selectedGoal, setSelectedGoal] = useState(false);
   const [row, col] = gridIdx.split(",");
   // console.log('render')
 
   const handleClick = () => {
-    console.log('clicked ', gridIdx)
-    // setSelected(!selected);
+    console.log('clicked ', gridIdx);
     if (!startGoalSwitch) {
       gridMap[row][col].start = !gridMap[row][col].start;
       if (startIdx) {
@@ -29,14 +30,18 @@ const Grid = ({ gridMap, gridIdx, appStates:[setStartIdx, setGoalIdx, setStartGo
     }
   }
 
-  // useEffect(() => {
-  //   console.log('changed')
-  // }, [gridVal])
+  const handleMouseOver = ()=> {
+    if (mousedownRef.current) {
+      gridMap[row][col].wall = !gridMap[row][col].wall;
+    notify(notification+1)
+    }
+  }
 
-  // console.log('grid re-render')
-  //  ${selectedStart && 'start'}
-  // 
-  // ${selectedGoal && 'goal'}
+  // const handleMouse = ()=> {
+  //   console.log('mousedown or up')
+  //   mousedownRef.current = !mousedownRef.current;
+  // } 
+
   return (
     <div className={
       `grid
@@ -44,31 +49,17 @@ const Grid = ({ gridMap, gridIdx, appStates:[setStartIdx, setGoalIdx, setStartGo
       ${gridMap[row][col].goal && 'goal'}
       ${gridMap[row][col].searching && 'searching'}
       ${gridMap[row][col].found && 'found'}
+      ${gridMap[row][col].wall && 'wall'}
       `} 
-      onClick={handleClick} > </div>
+      onClick={handleClick} 
+      // onMouseDown={handleMouse} 
+      onMouseOver={handleMouseOver}
+      // onMouseUp={handleMouse} 
+      >
+        {children}
+      </div>
   )
 }
 
-// const Grid = ({ gridMap, gridIdx, value }) => {
-//   const [selected, setSelected] = useState(false);
-//   const [row, col] = gridIdx.split(',');
-
-//   const [val, setVal] = useState(gridMap[row][col])
-
-//   const handleClick = () => {
-//     setSelected(!selected);
-
-//     const [row, col] = gridIdx.split(',');
-//     gridMap[row][col] = !gridMap[row][col];
-//   }
-
-//   useEffect(() => {
-//     console.log('changed')
-//   }, [value])
-
-//   return (
-//     <div className={`grid ${selected && 'selected'}`} onClick={ ()=> handleClick() } > {value && "hi"}</div>
-//   )
-// }
 
 export default Grid

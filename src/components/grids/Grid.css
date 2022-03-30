@@ -6,6 +6,7 @@
     height: 20px;
     background-color: whitesmoke;
     margin: 0 0 0 1px;
+    transition: backgroud-color, 500ms;
 }
 
 .grid.start {
@@ -25,5 +26,5 @@
 }
 
 .grid.wall {
-    background-color: brown;
+    background-color: grey;
 }
