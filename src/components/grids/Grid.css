@@ -1,12 +1,21 @@
 .grid {
     display: inline-block;
-    border: 2px solid lightslategray;
-    border-radius: 5px;
-    width: 20px;
-    height: 20px;
+    border: 1px solid lightsteelblue;
+    /* border-radius: 5px; */
+    width: 25px;
+    height: 25px;
     background-color: whitesmoke;
-    margin: 0 0 0 1px;
+    margin: 0;
+    padding: 0;
     transition: backgroud-color, 500ms;
+}
+
+.rows {
+    height:25px
+}
+
+.grid.path {
+    background-color: blue;
 }
 
 .grid.start {
@@ -17,14 +26,15 @@
     background-color: red;
 }
 
-.searching {
+.grid.searching {
     background-color: yellow;
 }
 
-.grid.goal.found {
+.grid.found {
     background-color: black;
 }
 
 .grid.wall {
     background-color: grey;
 }
+

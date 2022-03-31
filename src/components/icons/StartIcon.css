@@ -1,13 +1,10 @@
-/* .container {
-    display: inline-block;
-    margin: 0 auto;
-    background-color: aqua;
-} */
-
 .start_icon {
-    /* display: table; */
     background-color: green;
     height: 15px;
     width: 15px;
-    margin: 0 auto
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+    border-radius: 50%;
 }

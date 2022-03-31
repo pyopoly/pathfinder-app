@@ -1,46 +1,44 @@
 import Header from "./components/nav/Header";
 import Grids from "./components/grids/Grids";
 
-import Grid from "./components/grids/Grid";
+import Test from "./components/grids/Test";
 import StartIcon from './components/icons/StartIcon';
 import { useEffect, useRef, useState } from "react";
+import useWindowDimensions from "./customHooks/useWindowDimensions";
+import bfs from "./searchAlgorithms/breadth-first-search";
 
 
-const getWindowDimensions = () => {
-  const { innerHeight: height, innerWidth: width } = window;
-  return [height, width];
-}
 
-const useWindowDimensions = () => {
-  const [windowDimensions, setWindowDimenstions] = useState(getWindowDimensions());
+// const GridStatus = () => {
+//   return {
+//     start: false,
+//     goal: false,
+//     found: false,
+//     searching: false,
+//     path: false,
+//     wall: false
+//   }
+// }
 
-  function handleResize() {
-    setWindowDimenstions(getWindowDimensions());
+// const createGridMap = (rows, columns) => {
+//   return new Array(rows).fill().map(() => new Array(columns).fill().map(() => GridStatus()));
+// }
 
-  };
-
-  useEffect(() => {
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  return windowDimensions;
-}
-
-
-const GridStatus = () => {
-  return {
-    start: false,
-    goal: false,
-    found: false,
-    searching: false,
-    wall: false
-  }
-}
 
 const createGridMap = (rows, columns) => {
-  return new Array(rows).fill().map(() => new Array(columns).fill().map(() => GridStatus()));
+  return new Array(rows).fill().map(() => new Array(columns).fill().map(()=>({status: 'unvisited'})));
 }
+
+const createGridBroard = (rows, columns) => {
+  const board = {}
+  for (let r = 0; r < rows; r++) {
+    for (let c =0; c < columns; c++) {
+      board[`${r},${c}`] = {setStatus: null};
+    }
+  }
+  return board
+}
+
 
 // const size = 25;
 // const gridMap = new Array(size).fill().map(() => new Array(size).fill().map(() => Grid()));
@@ -48,7 +46,7 @@ const createGridMap = (rows, columns) => {
 const resetGridMap = (gridMap, [setStartIdx, setGoalIdx, setStartGoalSwitch]) => {
   for (let r in gridMap) {
     for (let c in gridMap) {
-      gridMap[r][c] = GridStatus();
+      gridMap[r][c] = 'unvisited';
     }
   }
   setStartIdx(null);
@@ -57,57 +55,9 @@ const resetGridMap = (gridMap, [setStartIdx, setGoalIdx, setStartGoalSwitch]) =>
 }
 
 
-const getNeighbours = ([row, col], rowLength, colLength) => {
-  row = parseInt(row)
-  col = parseInt(col)
-  // Check if row and col are inBounds. If false, ... spearding empty [] does nothing.
-  let neighbours = [
-    ...((row + 1 >= 0 && row + 1 < rowLength) ? [[row + 1, col]] : []),
-    ...((row - 1 >= 0 && row - 1 < rowLength) ? [[row - 1, col]] : []),
-    ...((col + 1 >= 0 && col + 1 < colLength) ? [[row, col + 1]] : []),
-    ...((col - 1 >= 0 && col - 1 < colLength) ? [[row, col - 1]] : []),
-  ];
-  return neighbours;
-}
 
 
-const bfs = async (gridMap, startIdx, goalIdx, setGoalIdx, [notification, notify]) => {
-  if (!startIdx || !goalIdx) return;
 
-  const [startRow, startCol] = startIdx.split(","); parseInt()
-
-  let queue = [[startRow, startCol]]
-  let visited = new Set([`${[startRow, startCol]}`])
-
-  while (queue.length > 0) {
-    const current = queue.shift();
-
-    // process
-    const [r, c] = current;
-    if (gridMap[r][c].wall) continue
-
-    gridMap[r][c].searching = true;
-
-
-    await new Promise(r => setTimeout(r, 0));
-
-    const neighbours = getNeighbours(current, gridMap.length, gridMap[0].length);
-
-    for (let neighbour of neighbours) {
-      if (!visited.has(`${neighbour}`)) {
-        visited.add(`${neighbour}`);
-        queue.push(neighbour);
-      }
-    }
-
-    if (`${current}` === goalIdx) {
-      gridMap[r][c].found = true;
-      queue.length = 0
-    }
-    notify(++notification);
-  }
-  setGoalIdx(null);
-}
 
 
 function App() {
@@ -124,27 +74,30 @@ function App() {
   const gridMap = useRef(createGridMap(rowNumber, colNumber)).current;
 
 
+  const b = useRef(createGridBroard(rowNumber, colNumber)).current;
+  // let b = createGridBroard(5, 10)
+  // console.log(b)
+
   return (
     <div className="App">
       <Header />
-      <Grids gridMap={gridMap} setStart={setStartIdx} appStates={appStates} />
+      <Grids gridMap={gridMap} setStart={setStartIdx} appStates={appStates} b={b} />
 
       <button onClick={() => {
         console.log(startIdx);
         console.log(goalIdx)
       }}>start, goal</button>
-      <button onClick={() => goalIdx ? bfs(gridMap, startIdx, goalIdx, setGoalIdx, notifyChanges) : resetGridMap(gridMap, appStates)}>{goalIdx ? 'bfs' : 'reset'}</button>
+      <button onClick={() => goalIdx ? (()=>{let result = bfs(gridMap, startIdx, goalIdx, setGoalIdx, notifyChanges);
+      // console.log(result.th)
+      // result.then(r=>console.log(r))
+      })() : resetGridMap(gridMap, appStates)}>{goalIdx ? 'bfs' : 'reset'}</button>
       <button onClick={() => notifyChanges[1](notifyChanges[0] + 1)} >refresh</button>
-      <Grid
-
-        gridMap={gridMap}
-        gridIdx={"0,0"}
-
-        mousedownRef={""}
-        appStates={appStates}
-      >
-        <StartIcon />
-      </Grid>
+      <Test>
+        {/* <StartIcon /> */}
+      </Test>
+      <button onClick={()=> {
+        b['0,0'].setStatus('now')
+      }}>set status</button>
 
 
     </div>

@@ -1,0 +1,95 @@
+.gridtest {
+    display: inline-block;
+    border: 2px solid lightslategray;
+    border-radius: 5px;
+    width: 20px;
+    height: 20px;
+    background-color: whitesmoke;
+    margin: 0 0 0 1px;
+    transition: backgroud-color, 500ms;
+}
+
+.visited{
+    border: 1px solid rgb(175, 216, 248);
+    animation-name: visitedAnimation;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+  }
+
+  @keyframes visitedAnimation {
+    0% {
+      transform: scale(.3);
+      background-color: rgba(0, 0, 66, 0.75);
+      border-radius: 100%;
+    }
+  
+    50% {
+      background-color: rgba(17, 104, 217, 0.75);
+    }
+  
+    75% {
+      transform: scale(1.2);
+      background-color: rgba(0, 217, 159, 0.75)
+    }
+  
+    100% {
+      transform: scale(1.0);
+      background-color: rgba(0, 190, 218, 0.75);
+    }
+  }
+
+ td {
+    border: 1px solid;
+  }
+.start_icon {
+    background-color: green;
+    height: 15px;
+    width: 15px;
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+    border-radius: 50%;
+    
+    transition: height, 500ms;
+    transition: border-radius, 500ms;
+}
+
+
+.start_icon.switch_on {
+    
+    background-color: aqua;
+    height:20px;
+    width:20px;
+    border-radius:0%;
+}
+
+.grid.path {
+    background-color: blue;
+}
+
+.grid.start {
+    background-color: greenyellow;
+}
+
+.grid.goal {
+    background-color: red;
+}
+
+.searching {
+    background-color: yellow;
+}
+
+.grid.goal.found {
+    background-color: black;
+}
+
+.grid.wall {
+    background-color: grey;
+}
+
