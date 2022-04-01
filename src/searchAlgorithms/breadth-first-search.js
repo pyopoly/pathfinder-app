@@ -1,67 +1,60 @@
-const getNeighbours = ([row, col], rowLength, colLength) => {
-    row = parseInt(row)
-    col = parseInt(col)
-    // Check if row and col are inBounds. If false, ... spearding empty [] does nothing.
+const getNeighbours = (idx, rowLength, colLength) => {
+    const [row, col] = idx.split(",").map(Number)
     let neighbours = [
-        ...((row + 1 >= 0 && row + 1 < rowLength) ? [[row + 1, col]] : []),
-        ...((row - 1 >= 0 && row - 1 < rowLength) ? [[row - 1, col]] : []),
-        ...((col + 1 >= 0 && col + 1 < colLength) ? [[row, col + 1]] : []),
-        ...((col - 1 >= 0 && col - 1 < colLength) ? [[row, col - 1]] : []),
+        ...((row + 1 >= 0 && row + 1 < rowLength) ? [`${row + 1},${col}`] : []),
+        ...((row - 1 >= 0 && row - 1 < rowLength) ? [`${row - 1},${col}`] : []),
+        ...((col + 1 >= 0 && col + 1 < colLength) ? [`${row},${col + 1}`] : []),
+        ...((col - 1 >= 0 && col - 1 < colLength) ? [`${row},${col - 1}`] : []),
     ];
     return neighbours;
 }
 
-const bfs = async (gridMap, startIdx, goalIdx, setGoalIdx, [notification, notify]) => {
+
+const bfs = async (gridMap, startIdx, goalIdx, rowNumber, colNumber) => {
     if (!startIdx || !goalIdx) return;
 
-    const [startRow, startCol] = startIdx.split(",").map(Number);
-    let queue = [[startRow, startCol]];
-    // let visited = new Set([`${[startRow, startCol]}`]);
-    let visited = { [`${[startRow, startCol]}`]: null };
+    const queue = [startIdx]
+    let visited = { [startIdx]: null };
 
     while (queue.length > 0) {
         const current = queue.shift();
-
         // Processing current node ***
-        const [r, c] = current;
-        if (gridMap[r][c].wall) continue
-
-        gridMap[r][c].status = 'searching';
+        if (gridMap[current].status === 'wall') continue
+        (gridMap[current].status !== 'start') && gridMap[current].setStatus('visited');
 
 
         await new Promise(r => setTimeout(r, 0));
 
-        const neighbours = getNeighbours(current, gridMap.length, gridMap[0].length);
+        const neighbours = getNeighbours(current, rowNumber, colNumber);
 
         for (let neighbour of neighbours) {
-            if (!(`${neighbour}` in visited)) {
-                visited[`${neighbour}`] = current;
+            if (!(neighbour in visited)) {
+                visited[neighbour] = current;
                 queue.push(neighbour);
             }
         }
 
         // Found the Goal ***
-        if (`${current}` === goalIdx) {
-            gridMap[r][c].status = 'found';
+        if (current === goalIdx) {
+            gridMap[current].setStatus('found')
             queue.length = 0
         }
-        notify(++notification);
     }
-    setGoalIdx(null);
-    // return visited;
-    let node = visited[goalIdx]
-    while (node) {
-        console.log("prev: ", node)
-        const [r, c] = node
-        node = visited[node]
 
+    let previousNode = visited[goalIdx]
+    let path = []
+    while (previousNode) {
+        path.push(previousNode)
+        previousNode = visited[previousNode]
+    }
+
+    path.pop();  //pop the first of the path, which is the start node 
+    while (path.length > 0) {
+        const current = path.pop();
+        gridMap[`${current}`].setStatus('path')
         await new Promise(r => setTimeout(r, 100));
-        gridMap[r][c].status = 'path';
-
-        notify(++notification);
     }
-
-    return visited
+    return path
 }
 
 export default bfs;
