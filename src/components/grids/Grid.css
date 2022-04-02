@@ -1,39 +1,40 @@
 .grid {
-    display: inline-block;
-    border: 1px solid lightsteelblue;
-    /* border-radius: 5px; */
-    width: 25px;
-    height: 25px;
-    background-color: whitesmoke;
-    margin: 0;
-    padding: 0;
-    transition: backgroud-color, 500ms;
+  display: inline-block;
+  border: 1px solid lightsteelblue;
+  width: 25px;
+  height: 25px;
+  background-color: whitesmoke;
+  /* margin: 0px; */
+  margin-left: -1px;
+  padding: 0px;
+  transition: backgroud-color, 500ms;
 }
 
 .rows {
-    height:25px
+  margin: 0;
+  height: 26px;
 }
 
 .grid.path {
-    background-color: blue;
+  background-color: blue;
 }
 
-
-
 .grid.goal {
-    background-color: red;
+  background-color: red;
+
+  background-image: url(../../svg/goal-flag.svg);
 }
 
 .grid.searching {
-    background-color: yellow;
+  background-color: yellow;
 }
 
 .grid.found {
-    background-color: black;
+  background-color: black;
 }
 
 .grid.wall {
-    background-color: grey;
+  background-color: grey;
 }
 
 
@@ -41,39 +42,40 @@
 
 
 .visited {
-    border: 1px solid rgb(175, 216, 248);
-    animation-name: visitedAnimation;
-    animation-duration: 1.5s;
-    animation-timing-function: ease-out;
-    animation-delay: 0;
-    animation-direction: alternate;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
-    animation-play-state: running;
+  border: 1px solid rgb(175, 216, 248);
+  animation-name: visitedAnimation;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+@keyframes visitedAnimation {
+  0% {
+    transform: scale(.3);
+    background-color: rgba(0, 0, 66, 0.75);
+    border-radius: 100%;
   }
-  
-  @keyframes visitedAnimation {
-    0% {
-      transform: scale(.3);
-      background-color: rgba(0, 0, 66, 0.75);
-      border-radius: 100%;
-    }
-  
-    50% {
-      background-color: rgba(17, 104, 217, 0.75);
-    }
-  
-    75% {
-      transform: scale(1.2);
-      background-color: rgba(0, 217, 159, 0.75)
-    }
-  
-    100% {
-      transform: scale(1.0);
-      background-color: rgba(0, 190, 218, 0.75);
-    }
+
+  50% {
+    background-color: rgba(17, 104, 217, 0.75);
   }
-  
-  .grid.start {
-    background-color: greenyellow !important;
+
+  75% {
+    transform: scale(1.2);
+    background-color: rgba(0, 217, 159, 0.75)
+  }
+
+  100% {
+    transform: scale(1.0);
+    background-color: rgba(0, 190, 218, 0.75);
+  }
+}
+
+.grid.start {
+  background-color: greenyellow !important;
+  background-image: url(../../svg/start-arrow-right.svg);
 }

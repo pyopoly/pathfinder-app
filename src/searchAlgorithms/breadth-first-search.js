@@ -1,9 +1,9 @@
 const getNeighbours = (idx, rowLength, colLength) => {
-    const [row, col] = idx.split(",").map(Number)
+    const [row, col] = idx.split(",").map(Number);
     let neighbours = [
-        ...((row + 1 >= 0 && row + 1 < rowLength) ? [`${row + 1},${col}`] : []),
         ...((row - 1 >= 0 && row - 1 < rowLength) ? [`${row - 1},${col}`] : []),
         ...((col + 1 >= 0 && col + 1 < colLength) ? [`${row},${col + 1}`] : []),
+        ...((row + 1 >= 0 && row + 1 < rowLength) ? [`${row + 1},${col}`] : []),
         ...((col - 1 >= 0 && col - 1 < colLength) ? [`${row},${col - 1}`] : []),
     ];
     return neighbours;
@@ -19,8 +19,11 @@ const bfs = async (gridMap, startIdx, goalIdx, rowNumber, colNumber) => {
     while (queue.length > 0) {
         const current = queue.shift();
         // Processing current node ***
-        if (gridMap[current].status === 'wall') continue
-        (gridMap[current].status !== 'start') && gridMap[current].setStatus('visited');
+        if (gridMap[current].icon === undefined) {
+            console.log(current)
+        }
+        if (gridMap[current].icon === 'wall') continue
+        gridMap[current].setStatus('visited');
 
 
         await new Promise(r => setTimeout(r, 0));

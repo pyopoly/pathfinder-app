@@ -3,44 +3,50 @@ import './Grid.css';
 // import StartIcon from '../icons/StartIcon';
 // import { useState, useContext } from 'react';
 
-const Grid = ({ children, board, gridIdx, mousedownRef, gridIconRef, appStates:[setStartIdx, setGoalIdx, startIdx, goalIdx]}) => {
+const Grid = ({ children, board, gridIdx, mousedownRef, gridIconRef: iconRef, appStates: [setStartIdx, setGoalIdx, startIdx, goalIdx] }) => {
   const [gridStatus, setGridStatus] = useState('unvisited');
+  const [icon, setIcon] = useState(null);
   board[gridIdx] = {
     status: gridStatus,
-    setStatus: setGridStatus
+    setStatus: setGridStatus,
+    icon: icon,
+    setIcon: setIcon
   }
-  
+
   const handleMouseDown = () => {
     mousedownRef.current = true;
-    console.log("mousedown", gridIdx, startIdx, mousedownRef.current);
+    console.log("mousedown", gridIdx, startIdx, mousedownRef.current, "  ", icon);
 
-    if (gridIdx===startIdx) {
-      gridIconRef.current = "start"
-    }
-    if (gridIdx===goalIdx) {
-      gridIconRef.current = "goal"
-    }
-    
+    if (icon)
+      iconRef.current = icon;
+    else
+      setIcon("wall");
   }
 
   const handleMouseUp = () => {
     mousedownRef.current = false;
-    gridIconRef.current = "wall"
+    iconRef.current = "wall"
   }
 
   const handleMouseOver = () => {
-    if (mousedownRef.current) {
-      board[gridIdx].setStatus(gridIconRef.current);
-    } 
-    if (gridIconRef.current==="start") {
-      board[startIdx].setStatus('unvisited')
-      setStartIdx(gridIdx)
+    if (mousedownRef.current) {             // only handleMouseOver if mouse is down
+
+      if (!icon || icon === "wall")         // set this Grid's icon       
+        setIcon(iconRef.current);
+      
+      switch (iconRef.current) {            // previous Grid.icon === null, if start/goal
+        case "start":
+          board[startIdx].setIcon(null);
+          setStartIdx(gridIdx);
+          break;
+        case "goal":
+          board[goalIdx].setIcon(null);
+          setGoalIdx(gridIdx);
+          break;
+        default:
+          break;
+      }
     }
-    if (gridIconRef.current==="goal") {
-      board[goalIdx].setStatus('unvisited')
-      setGoalIdx(gridIdx)
-    }
-    
   }
 
 
@@ -49,16 +55,15 @@ const Grid = ({ children, board, gridIdx, mousedownRef, gridIconRef, appStates:[
     <div className={
       `grid
       ${gridStatus}
-      ${(startIdx === gridIdx) && "start" }
-      ${(goalIdx === gridIdx) && "goal" }
-      `} 
-      // onClick={handleClick} 
+      ${icon}
+      `}
+      // onClick={} 
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
       onMouseOver={handleMouseOver}
-      onMouseDown={handleMouseDown} 
-      onMouseUp={handleMouseUp} 
-      >
-        {children}
-      </div>
+    >
+      {children}
+    </div>
   )
 }
 

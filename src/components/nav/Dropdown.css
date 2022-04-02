@@ -1,0 +1,12 @@
+.dropdown-wrapper, .dropdown-header, .dropdown-list {
+    display: inline-block;
+    background-color: blueviolet;
+}
+
+.dropdown-wrapper, .dropdown-list {
+    display: inline-flex;
+    flex-direction: column;
+    z-index:1000
+}
+
+/* dropdown-list-item */
