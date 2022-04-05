@@ -3,7 +3,7 @@ import Grids from "./components/grids/Grids";
 import { useEffect, useRef, useState } from "react";
 import useWindowDimensions from "./customHooks/useWindowDimensions";
 import searchAlgo from "./searchAlgorithms/breadth-first-search";
-import generateWalls from "./mazes/maze";
+import generateMaze from "./mazes/maze";
 
 
 const createGridBoard = (rows, columns) => {
@@ -90,7 +90,7 @@ function App() {
         }}> {searchAlgoName} </button>
 
         <button className="btn" key="2" onClick={() => resetGridMap(board)}> Reset </button>
-        <button className="btn" key="3" onClick={() => generateWalls(board, 0, rowNumber - 1, 0, colNumber - 1, startIdx, goalIdx)}> Wall </button>
+        <button className="btn" key="3" onClick={() => generateMaze(board, 0, rowNumber - 1, 0, colNumber - 1, startIdx, goalIdx)}> Wall </button>
 
       </Header>
 
