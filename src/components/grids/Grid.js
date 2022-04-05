@@ -15,12 +15,15 @@ const Grid = ({ children, board, gridIdx, mousedownRef, gridIconRef: iconRef, ap
 
   const handleMouseDown = () => {
     mousedownRef.current = true;
-    console.log("mousedown", gridIdx, startIdx, mousedownRef.current, "  ", icon);
-
-    if (icon)
+    console.log("mousedown", gridIdx, startIdx, mousedownRef.current, "icon:", icon);
+    if (icon === "wall") {
+      iconRef.current = null;
+      setIcon(null);
+    } else if (icon) {
       iconRef.current = icon;
-    else
+    } else {
       setIcon("wall");
+    }
   }
 
   const handleMouseUp = () => {
@@ -36,11 +39,9 @@ const Grid = ({ children, board, gridIdx, mousedownRef, gridIconRef: iconRef, ap
       
       switch (iconRef.current) {            // previous Grid.icon === null, if start/goal
         case "start":
-          board[startIdx].setIcon(null);
           setStartIdx(gridIdx);
           break;
         case "goal":
-          board[goalIdx].setIcon(null);
           setGoalIdx(gridIdx);
           break;
         default:

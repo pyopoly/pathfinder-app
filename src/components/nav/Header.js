@@ -1,19 +1,17 @@
 import './Header.css';
 import Dropdown from './Dropdown';
 
-const Header = ({ children, height, width, list }) => {
+const Header = ({ children, height, width, list, searchAlgoStates }) => {
   // console.log('header re-render')
+  const [btn, ...rest] = children;
   return (
     <div className="header">
       <span>height: {height}</span>
       <span>width: {width} </span>
-      {/* <span>       Header</span> */}
-      {/* <button> Start </button> */}
+      {btn}
+      <Dropdown list={list} searchAlgoStates={searchAlgoStates} />
+      {rest}
 
-    {children}
-    {/* <span> </span> */}
-    <Dropdown list={list} />
-    
     </div>
   )
 }

@@ -1,12 +1,72 @@
 .dropdown-wrapper, .dropdown-header, .dropdown-list {
     display: inline-block;
-    background-color: blueviolet;
+    transition: all 500ms;
+    /* font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+    /* font-weight: 400; */
+}
+
+.dropdown-header:hover, .dropdown-list-item:hover {
+    cursor: pointer;
 }
 
 .dropdown-wrapper, .dropdown-list {
     display: inline-flex;
     flex-direction: column;
-    z-index:1000
+    z-index: 100;
 }
 
-/* dropdown-list-item */
+/* .dropdown-wrapper {
+    height:100px
+} */
+
+.dropdown-header {
+    display:table-cell;
+    vertical-align:middle;
+    padding: 18px;
+}
+
+.icon {
+    /* color: grey; */
+    padding-left: 6px;
+    transform: scale(1.7);
+}
+
+.dropdown-header:hover {
+    color: aqua;
+}
+
+.dropdown-header.dropdown-clicked {
+    background-color: rgba(0, 190, 218, 0.75);
+    color: white;
+}
+
+/* 
+================
+Dropdown popup of list items
+================
+*/
+.dropdown-list {
+    position: absolute;
+    border-radius: 4px;
+    margin-top: 62px;
+    padding: 5px;
+    background-color: black;
+}
+
+/* 
+================
+Individual items of dropdown popup
+================
+*/
+.dropdown-list-item {
+    font-size: medium;
+    width: fit-content;
+    border-radius: 4px;
+    padding: 10px;
+    background-color: black;
+    color: white
+}
+
+.dropdown-list-item:hover {
+    background-color: rgba(41, 213, 240, 0.75);
+}
