@@ -16,27 +16,46 @@
 }
 
 .grid.path {
-  background-color: blue;
+  background-color: rgb(213, 240, 140);
+  background-size: 17px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
-.grid.goal {
-  background-color: red;
-
-  background-image: url(../../svg/goal-flag.svg);
+.grid.path.up {
+  background-image: url(../../svg/arrow-up.svg);
 }
 
-.grid.searching {
-  background-color: yellow;
+.grid.path.right {
+  background-image: url(../../svg/arrow-right.svg);
+}
+
+.grid.path.up {
+  background-image: url(../../svg/arrow-up.svg);
+}
+
+.grid.path.down {
+  background-image: url(../../svg/arrow-down.svg);
+}
+
+.grid.path.left:before {
+  content: "";
+  position: fixed;
+  width: 17px;
+  height: 17px;
+  transform: rotate(-90deg);
+  margin: 4px 0 0 4px;
+  background-position: center;
+  background-image: url(../../svg/arrow-up.svg);
 }
 
 .grid.found {
-  background-color: black;
+  background-image: url(../../svg/found-star.svg);
 }
 
 .grid.wall {
   background-color: darkslategray;
 }
-
 
 .visited {
   border: 1px solid rgb(175, 216, 248);
@@ -74,5 +93,12 @@
 
 .grid.start {
   background-color: greenyellow !important;
-  background-image: url(../../svg/start-arrow-right.svg);
+  background-image: url(../../svg/start.svg);
+  background-size: 19px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.goal {
+  background-image: url(../../svg/goal.svg);
 }

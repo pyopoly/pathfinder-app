@@ -28,8 +28,22 @@ const processAndFindNode = (current, arrayOfNodes, visited, { board, goalIdx, ro
 
 
 const showPath = async (board, visited, goalIdx) => {
-    let previousNode = visited[goalIdx]
-    let path = []
+    const findDirection = (current, next) => {
+        if (!next) return "path found";
+        const [row, col] = current.split(",").map(Number);
+        const [rowNext, colNext] = next.split(",").map(Number);
+        const direction = `${rowNext - row},${colNext - col}`;
+        const directions = {
+            "-1,0": "up",
+            "0,1": "right",
+            "1,0": "down",
+            "0,-1": "left"
+        }
+        return directions[direction];
+    }
+    let previousNode = visited[goalIdx];
+    let path = [goalIdx];
+    // The path starts in reverse from the goal node, and is saved into the path array.
     while (previousNode) {
         path.push(previousNode)
         previousNode = visited[previousNode]
@@ -37,10 +51,11 @@ const showPath = async (board, visited, goalIdx) => {
     path.pop();  //pop the first of the path, which is the start node 
     while (path.length > 0) {
         const current = path.pop();
-        board[`${current}`].setStatus('path')
+        const next = path[path.length - 1];
+        board[`${current}`].setStatus(`path ${findDirection(current, next)}`);
         await new Promise(r => setTimeout(r, 100));
     }
     return path
 }
 
-export {getNeighbours, processAndFindNode, showPath}
+export { getNeighbours, processAndFindNode, showPath }
