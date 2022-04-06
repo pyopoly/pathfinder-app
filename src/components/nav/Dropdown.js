@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import './Dropdown.css';
 import { MdArrowDropDown } from 'react-icons/md';
+import './Dropdown.css';
 
 
 const Dropdown = ({ title, list, callBackList }) => {

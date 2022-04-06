@@ -49,7 +49,7 @@ const aStarAlgorithm = async (board, startIdx, goalIdx, rowNumber, colNumber) =>
         const currentnode = heap.getMin((element)=> element[0]);
         const currentCost = currentnode[2]
         const current = currentnode[1]
-        console.log("step", current, currentCost)
+        // console.log("step", current, currentCost)
 
 
         // If wall, don't do anything
@@ -82,7 +82,7 @@ const aStarAlgorithm = async (board, startIdx, goalIdx, rowNumber, colNumber) =>
     
     showPath(board, visited, goalIdx)
     // heap.printHeap()
-    console.log(costs)
+    // console.log(costs)
 }
 
 

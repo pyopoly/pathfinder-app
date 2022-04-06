@@ -16,10 +16,10 @@ const createGridBoard = (rows, columns) => {
   return board
 }
 
-const resetGridMap = (board) => {
+const resetGridMap = (board, wall=false) => {
   for (const gridIdx in board) {
     board[gridIdx].setStatus("unvisited");  //reset status
-    board[gridIdx].icon === "wall" && board[gridIdx].setIcon(null);  //reset wall
+    (board[gridIdx].icon === "wall" && wall) && board[gridIdx].setIcon(null);  //reset wall
   }
 }
 
@@ -39,7 +39,6 @@ function App() {
   const [goalIdx, setGoalIdx] = useState(`${Math.floor(rowNumber / 2)},${Math.floor(colNumber * 4 / 6)}`);
   const appStates = [setStartIdx, setGoalIdx, startIdx, goalIdx]
 
-  // const [btnToggle, setbtnToggle] = useState(false);
   const [searchAlgoName, setSearchAlgoName] = useState("Choose Algorithm");
   const [mazeAlgoName, setMazeAlgoName] = useState("Mazes");
 
@@ -54,6 +53,7 @@ function App() {
   useEffect(() => {
     board[startIdx].setIcon("start");
     board[goalIdx].setIcon("goal");
+    resetGridMap(board, true);
     return () => {
       board[startIdx].setIcon(null);
       board[goalIdx].setIcon(null);
@@ -64,28 +64,14 @@ function App() {
     <div className="App">
       <Header list={searchAlgoList} searchAlgoStates={[searchAlgoName, setSearchAlgoName]} >
 
-        {/* <button className="btn" key="0" onClick={() => {
-          console.log("startIdx", startIdx);
-          console.log("goalIdx", goalIdx);
-          console.log("height", height, "width", width);
-          console.log("gridsize", gridSize, "rowNum", rowNumber, "colNum", colNumber)
-        }}>start, goal</button> */}
-
         <Dropdown title="Algorithms" list={searchAlgoList} algoStates={[searchAlgoName, setSearchAlgoName]} callBackList={new Array(searchAlgoList.length).fill((item) => setSearchAlgoName(item))} />
-        
-        <button className="btn" key="1" onClick={() =>searchAlgo(searchAlgoName, { board, startIdx, goalIdx, rowNumber, colNumber })}> {searchAlgoName} </button>
-
-        <Dropdown title="Mazes" list={mazeAlgoList} algoStates={[mazeAlgoName, setMazeAlgoName]} callBackList={[() => { generateMaze(board, 0, rowNumber - 1, 0, colNumber - 1, startIdx, goalIdx) }]} />
-        
-        <button className="btn-2" key="3" onClick={() => resetGridMap(board)}> Reset </button>
-
+        <button className="btn" onClick={() => {searchAlgo(searchAlgoName, { board, startIdx, goalIdx, rowNumber, colNumber }); resetGridMap(board) }}> {searchAlgoName} </button>
+        <Dropdown title="Mazes" list={mazeAlgoList} algoStates={[mazeAlgoName, setMazeAlgoName]} callBackList={[() => { generateMaze(board, 0, rowNumber - 1, 0, colNumber - 1, startIdx, goalIdx);  resetGridMap(board, true); }]} />
+        <button className="btn reset-btn" onClick={() => resetGridMap(board, true)}> Reset </button>
 
       </Header>
 
-
       <Grids board={board} appStates={appStates} rowNumber={rowNumber} colNumber={colNumber} />
-
-
     </div>
   );
 }
