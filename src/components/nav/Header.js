@@ -1,17 +1,12 @@
 import './Header.css';
-import Dropdown from './Dropdown';
+// import Dropdown from './Dropdown';
 
-const Header = ({ children, height, width, list, searchAlgoStates }) => {
-  // console.log('header re-render')
-  const [btn, ...rest] = children;
+
+const Header = ({ children }) => {
   return (
     <div className="header">
-      <span>height: {height}</span>
-      <span>width: {width} </span>
-      {btn}
-      <Dropdown list={list} searchAlgoStates={searchAlgoStates} />
-      {rest}
-
+      <span className='app-title'> Search Algorithm App </span>
+      {children}
     </div>
   )
 }

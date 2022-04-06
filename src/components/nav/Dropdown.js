@@ -3,7 +3,7 @@ import './Dropdown.css';
 import { MdArrowDropDown } from 'react-icons/md';
 
 
-const Dropdown = ({ list, searchAlgoStates:[searchAlgoName, setSearchAlgoName] }) => {
+const Dropdown = ({ title, list, callBackList }) => {
     // const [title, setTitle] = useState("Algorithms")
     const [isListOpen, setIsListOpen] = useState(false);
     useEffect(() => {
@@ -15,8 +15,8 @@ const Dropdown = ({ list, searchAlgoStates:[searchAlgoName, setSearchAlgoName] }
     }, [isListOpen, setIsListOpen]);
     return (
         <div className="dropdown-wrapper">
-            <DropdownHeader title={searchAlgoName} listState={{ isListOpen, setIsListOpen }} />
-            {isListOpen && <DropdownList list={list} setTitle={setSearchAlgoName} />}
+            <DropdownHeader title={title} listState={{ isListOpen, setIsListOpen }} />
+            {isListOpen && <DropdownList list={list} callBackList={callBackList} />}
         </div>
     )
 }
@@ -26,8 +26,7 @@ const Dropdown = ({ list, searchAlgoStates:[searchAlgoName, setSearchAlgoName] }
 const DropdownHeader = ({ title, listState: { isListOpen, setIsListOpen } }) => {
     return (
         <div className={`dropdown-header ${isListOpen && 'dropdown-clicked'}`} onClick={() => setIsListOpen(!isListOpen)} >
-            {/* {title} */}
-            Algorithms
+            {title}
             <MdArrowDropDown className='icon' />
         </div>
     )
@@ -35,10 +34,10 @@ const DropdownHeader = ({ title, listState: { isListOpen, setIsListOpen } }) => 
 
 
 
-const DropdownList = ({ list, setTitle }) => {
+const DropdownList = ({ list, callBackList }) => {
     return (
         <div className="dropdown-list">
-            {list.map((item) => <span className='dropdown-list-item' key={item} onClick={()=>setTitle(item)}> {item} </span>)}
+            {list.map((item, idx) => <span className='dropdown-list-item' key={item} onClick={()=>callBackList[idx](item)}> {item} </span>)}
         </div>
     )
 }

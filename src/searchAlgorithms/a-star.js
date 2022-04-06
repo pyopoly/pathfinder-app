@@ -24,7 +24,7 @@ const heuristic = (idx, startIdx, goalIdx, preCost) => {
     // let dx = Math.abs(goalRow - row)
     // let dy = Math.abs(goalCol - col);
 
-    return distance 
+    return distance + cost
 }
 
 
@@ -40,12 +40,16 @@ const aStarAlgorithm = async (board, startIdx, goalIdx, rowNumber, colNumber) =>
 
     let visited = { [startIdx]: null };
 
+    
+    let costs = { [startIdx]: null };
+
     while (heap.heap.length > 0) {
         // const current = heap.getMin((element)=> element[0])[1];
         
         const currentnode = heap.getMin((element)=> element[0]);
         const currentCost = currentnode[2]
         const current = currentnode[1]
+        console.log("step", current, currentCost)
 
 
         // If wall, don't do anything
@@ -64,17 +68,21 @@ const aStarAlgorithm = async (board, startIdx, goalIdx, rowNumber, colNumber) =>
         for (const neighbour of neighbours) {
             if (!(neighbour in visited)) {
                 visited[neighbour] = current;
+                costs[neighbour] = currentCost
                 // const h = heuristic(neighbour, startIdx, goalIdx);
                 // heap.add([h, neighbour], (element)=> element[0])
                 const h = heuristic(neighbour, startIdx, goalIdx, currentCost);
-                heap.add([h, neighbour, (currentCost)], (element)=> element[0])
+                heap.add([h, neighbour, (currentCost + 1)], (element)=> element[0])
             }
         }
         // Delay
-        await new Promise(r => setTimeout(r, 500));
+        await new Promise(r => setTimeout(r, 0));
         // Show Path
-        showPath(board, visited, goalIdx)
     }
+    
+    showPath(board, visited, goalIdx)
+    // heap.printHeap()
+    console.log(costs)
 }
 
 

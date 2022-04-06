@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import useWindowDimensions from "./customHooks/useWindowDimensions";
 import searchAlgo from "./searchAlgorithms/breadth-first-search";
 import generateMaze from "./mazes/maze";
-
+import Dropdown from "./components/nav/Dropdown";
 
 const createGridBoard = (rows, columns) => {
   const board = {}
@@ -24,19 +24,9 @@ const resetGridMap = (board) => {
 }
 
 
+const searchAlgoList = ["Breadth-first Search", "Depth-first Search", "A* Search"];  // "Dijkstra's Algorithm"
+const mazeAlgoList = ["Recursive Division"];
 
-// const minHeap = () => {
-//   console.log('heap');
-// }
-
-// minHeap();
-
-
-const searchAlgoList = ["Breadth-first Search", "Depth-first Search", "A* Search", "Dijkstra's Algorithm"];
-
-// const useIcon = (board, clearPrevious, iconType) => {
-//   // const [icon, setIcon] = useState(iconType);
-// }
 
 function App() {
   const gridSize = 26;
@@ -51,6 +41,7 @@ function App() {
 
   // const [btnToggle, setbtnToggle] = useState(false);
   const [searchAlgoName, setSearchAlgoName] = useState("Choose Algorithm");
+  const [mazeAlgoName, setMazeAlgoName] = useState("Mazes");
 
   const board = useRef(createGridBoard(rowNumber, colNumber)).current;
 
@@ -71,30 +62,22 @@ function App() {
 
   return (
     <div className="App">
-      <Header
-        list={searchAlgoList}
-        searchAlgoStates={[searchAlgoName, setSearchAlgoName]}
-        height={height}
-        width={width}>
+      <Header list={searchAlgoList} searchAlgoStates={[searchAlgoName, setSearchAlgoName]} >
 
-
-        <button className="btn" key="0" onClick={() => {
+        {/* <button className="btn" key="0" onClick={() => {
           console.log("startIdx", startIdx);
           console.log("goalIdx", goalIdx);
           console.log("height", height, "width", width);
           console.log("gridsize", gridSize, "rowNum", rowNumber, "colNum", colNumber)
-        }}>start, goal</button>
+        }}>start, goal</button> */}
 
+        <Dropdown title="Algorithms" list={searchAlgoList} algoStates={[searchAlgoName, setSearchAlgoName]} callBackList={new Array(searchAlgoList.length).fill((item) => setSearchAlgoName(item))} />
+        
+        <button className="btn" key="1" onClick={() =>searchAlgo(searchAlgoName, { board, startIdx, goalIdx, rowNumber, colNumber })}> {searchAlgoName} </button>
 
-        <button className="btn" key="1" onClick={() => {
-          // let result = 
-          searchAlgo(searchAlgoName, { board, startIdx, goalIdx, rowNumber, colNumber });
-          // if (!result) alert("Please choose an algorithm first");
-        }}> {searchAlgoName} </button>
-
-        <button className="btn" key="2" onClick={() => generateMaze(board, 0, rowNumber - 1, 0, colNumber - 1, startIdx, goalIdx)}> Wall </button>
-
-        <button className="btn" key="3" onClick={() => resetGridMap(board)}> Reset </button>
+        <Dropdown title="Mazes" list={mazeAlgoList} algoStates={[mazeAlgoName, setMazeAlgoName]} callBackList={[() => { generateMaze(board, 0, rowNumber - 1, 0, colNumber - 1, startIdx, goalIdx) }]} />
+        
+        <button className="btn-2" key="3" onClick={() => resetGridMap(board)}> Reset </button>
 
 
       </Header>
