@@ -16,8 +16,8 @@
 }
 
 .grid.path {
-  background-color: rgb(213, 240, 140);
-  background-size: 17px;
+  background-color: rgb(248, 248, 192);
+  background-size: 13px;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -41,16 +41,17 @@
 .grid.path.left:before {
   content: "";
   position: fixed;
-  width: 17px;
-  height: 17px;
+  width: 14px;
+  height: 14px;
   transform: rotate(-90deg);
-  margin: 4px 0 0 4px;
+  margin: 5px 0 0 5px;
   background-position: center;
   background-image: url(../../svg/arrow-up.svg);
 }
 
 .grid.found {
   background-image: url(../../svg/found-star.svg);
+  background-size: 23px;
 }
 
 .grid.wall {
@@ -92,7 +93,7 @@
 }
 
 .grid.start {
-  background-color: greenyellow !important;
+  background-color: rgb(207, 255, 136) !important;
   background-image: url(../../svg/start.svg);
   background-size: 19px;
   background-repeat: no-repeat;
