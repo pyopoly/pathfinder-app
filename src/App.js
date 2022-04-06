@@ -18,16 +18,18 @@ const createGridBoard = (rows, columns) => {
 
 const resetGridMap = (board) => {
   for (const gridIdx in board) {
-    board[gridIdx].setStatus("unvisited");
+    board[gridIdx].setStatus("unvisited");  //reset status
+    board[gridIdx].icon === "wall" && board[gridIdx].setIcon(null);  //reset wall
   }
 }
 
 
-const minHeap = () => {
-  console.log('heap');
-}
 
-minHeap();
+// const minHeap = () => {
+//   console.log('heap');
+// }
+
+// minHeap();
 
 
 const searchAlgoList = ["Breadth-first Search", "Depth-first Search", "A* Search", "Dijkstra's Algorithm"];
@@ -85,12 +87,15 @@ function App() {
 
 
         <button className="btn" key="1" onClick={() => {
-          let result = searchAlgo(searchAlgoName, { board, startIdx, goalIdx, rowNumber, colNumber });
+          // let result = 
+          searchAlgo(searchAlgoName, { board, startIdx, goalIdx, rowNumber, colNumber });
           // if (!result) alert("Please choose an algorithm first");
         }}> {searchAlgoName} </button>
 
-        <button className="btn" key="2" onClick={() => resetGridMap(board)}> Reset </button>
-        <button className="btn" key="3" onClick={() => generateMaze(board, 0, rowNumber - 1, 0, colNumber - 1, startIdx, goalIdx)}> Wall </button>
+        <button className="btn" key="2" onClick={() => generateMaze(board, 0, rowNumber - 1, 0, colNumber - 1, startIdx, goalIdx)}> Wall </button>
+
+        <button className="btn" key="3" onClick={() => resetGridMap(board)}> Reset </button>
+
 
       </Header>
 

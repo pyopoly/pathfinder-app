@@ -3,6 +3,20 @@ import './Grid.css';
 // import StartIcon from '../icons/StartIcon';
 // import { useState, useContext } from 'react';
 
+const heuristic = (idx, startIdx, goalIdx) => {
+  const [row, col] = idx.split(",").map(Number);
+  const [goalRow, goalCol] = goalIdx.split(",").map(Number);
+  const [startRow, startCol] = startIdx.split(",").map(Number);
+
+  const distance = Math.abs(goalRow - row) + Math.abs(goalCol - col);
+  const cost = Math.abs(startRow - row) + Math.abs(startCol - col);
+  // let dx = Math.abs(goalRow - row)
+  // let dy = Math.abs(goalCol - col);
+
+  return cost
+}
+
+
 const Grid = ({ children, board, gridIdx, mousedownRef, gridIconRef: iconRef, appStates: [setStartIdx, setGoalIdx, startIdx, goalIdx] }) => {
   const [gridStatus, setGridStatus] = useState('unvisited');
   const [icon, setIcon] = useState(null);
@@ -16,6 +30,8 @@ const Grid = ({ children, board, gridIdx, mousedownRef, gridIconRef: iconRef, ap
   const handleMouseDown = () => {
     mousedownRef.current = true;
     console.log("mousedown", gridIdx, startIdx, mousedownRef.current, "icon:", icon);
+
+    console.log(heuristic(gridIdx, startIdx, goalIdx))
     if (icon === "wall") {
       iconRef.current = null;
       setIcon(null);

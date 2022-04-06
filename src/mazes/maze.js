@@ -9,7 +9,7 @@ const randomeMiddleIdx = (firstIdx, lastIdx, firstOtherIdx, lastOtherIdx, wideAr
         ends = wideArea ? [`${firstOtherIdx - 1},${middleIdx}`, `${lastOtherIdx + 1},${middleIdx}`] : [`${middleIdx},${firstOtherIdx - 1}`, `${middleIdx},${lastOtherIdx + 1}`];
         count++
         if (count === 10) {
-            console.log('force end', ends)
+            // console.log('force end', ends)
             middleIdx = false
             break;
         }
@@ -88,7 +88,7 @@ const generateMaze = async (board, firstRowIdx, lastRowIdx, firstColIdx, lastCol
     const obstructions = new Set([startIdx, goalIdx]);
 
     recursiveDivision(board, obstructions, firstRowIdx + 1, lastRowIdx - 1, firstColIdx + 1, lastColIdx - 1);
-    console.log('done')
+    
 }
 
 
