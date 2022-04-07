@@ -1,4 +1,4 @@
-import './DDHeader.css';
+import './Header.css';
 import { FaGithub } from 'react-icons/fa';
 
 const Header = ({ children }) => {

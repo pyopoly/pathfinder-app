@@ -77,11 +77,18 @@ tutorial-footer: height: 7+2= 9%
     float:right
 }
 
+.body-items {
+    display: flex;
+    align-items: center;
+    padding-left: 15%;
+    margin: 1%;
+}
+
 .sub-title {
     font-weight: bolder;
     color:rgb(48, 48, 48);
     font-size: large;
-    margin: 0 20px 0 40px;
+    margin: 0 2em 0 2.5em;
 }
 
 .sub-description {
@@ -90,9 +97,16 @@ tutorial-footer: height: 7+2= 9%
     width: 60%;
 }
 
-.body-items {
-    display: flex;
-    align-items: center;
-    padding-left: 15%;
-    margin: 1%;
+.sub-title-pg2 {
+    display: inline-block;
+    text-align: start;
+    font-weight: bold;
+    color:rgb(48, 48, 48);
+    width: 25%;
+    margin: 0 2em 0 0;
+}
+
+.sub-description-pg2 {
+    text-align: start;
+    width: 65%;
 }

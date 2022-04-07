@@ -1,4 +1,4 @@
-import Header from "./components/nav/DDHeader";
+import Header from "./components/nav/Header";
 import Grids from "./components/grids/Grids";
 import { useEffect, useRef, useState } from "react";
 import useWindowDimensions from "./customHooks/useWindowDimensions";
