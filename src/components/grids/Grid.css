@@ -4,7 +4,6 @@
   width: 25px;
   height: 25px;
   background-color: whitesmoke;
-  /* margin: 0px; */
   margin-left: -1px;
   padding: 0px;
   transition: backgroud-color, 500ms;

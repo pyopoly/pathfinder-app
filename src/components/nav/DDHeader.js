@@ -4,7 +4,7 @@ import { FaGithub } from 'react-icons/fa';
 const Header = ({ children }) => {
   return (
     <div className="header">
-      <span className='app-title'> Search Algorithm App </span>
+      <span className='app-title' onClick={()=> void window.location.reload()}> Search Algorithm App </span>
       <div className='app-btns'>
         {children}
         <div className='icon-container'>

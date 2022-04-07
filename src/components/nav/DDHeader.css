@@ -6,12 +6,20 @@
 .app-title {
   font-size: large;
   font-weight: bold;
-  margin: 0 10% 0 20px;
+  margin: 15px 0 0 15px;
+  float: left;
+  display: block;
+}
+
+.app-title:hover {
+  cursor: pointer;
 }
 
 .app-btns {
-  margin-left: 5%;
-  display: inline-block;
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  transform: translateX(5%)
 }
 
 .btn.reset-btn {
@@ -29,7 +37,7 @@
   color: #fff;
   border: none;
   padding: 8px 20px;
-  margin: 6px 10px 6px 10px;
+  margin: 6px 15px 6px 15px;
   border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
@@ -55,7 +63,6 @@
   display: block;
   width: 100%;
 }
-
 
 .icon-container{ 
   display: inline-flex;

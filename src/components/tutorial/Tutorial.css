@@ -55,7 +55,6 @@ tutorial-footer: height: 7+2= 9%
 .tutorial-body {
     overflow-y: scroll;
     width: 100%;
-    /* box-sizing: content-box; */
     padding-right: 17px;
     height: 66%;
 }
@@ -78,22 +77,22 @@ tutorial-footer: height: 7+2= 9%
     float:right
 }
 
-.description {
-    display: inline-block;
-    padding-left: 40px;
-    width: 80%;
-    text-align: start;
-}
-
 .sub-title {
     font-weight: bolder;
     color:rgb(48, 48, 48);
     font-size: large;
-    padding-right: 15px;
+    margin: 0 20px 0 40px;
+}
+
+.sub-description {
+    text-align: start;
+    display: inline-block;
+    width: 60%;
 }
 
 .body-items {
     display: flex;
     align-items: center;
-    padding-left: 10%;
+    padding-left: 15%;
+    margin: 1%;
 }
