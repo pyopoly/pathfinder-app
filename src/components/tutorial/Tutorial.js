@@ -3,30 +3,33 @@ import TTHeader from "./TTHeader";
 import TTBody from "./TTBody";
 import TTFooter from "./TTFooter";
 import { useState } from "react";
-
+import Page1 from "./Page1";
+import Page2 from "./Page2";
 
 const pages = {
   1: {
     page: 1,
-    title: "Intro Page",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    title: "Search Algorithm Visualizer",
+    subtitle: "See search algorithms in action for an easier understanding of the process.",
+    body: <Page1 />
   },
   2: {
     page: 2,
-    title: "Second Page",
-    content: "Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    title: "Algorithms & Mazes",
+    subtitle: "Try out these algorithms and mazes!",
+    body: <Page2 />
   },
 }
 
 const Tutorial = ({ setShowTutorial }) => {
   const [pageNumber, setPageNumber] = useState(1);
-  const totalPageNum = pages.length;
+  const totalPageNum = Object.keys(pages).length;
   return (
     <div className="tutorial-outer">
       <div className="tutorial-container">
         <TTHeader pages={pages} pageNumber={pageNumber} totalPageNum={totalPageNum} />
-        <TTBody />
-        <TTFooter setShowTutorial={setShowTutorial} />
+        <TTBody pages={pages} pageNumber={pageNumber} />
+        <TTFooter setShowTutorial={setShowTutorial} pageNumber={pageNumber} setPageNumber={setPageNumber} totalPageNum={totalPageNum} />
       </div>
     </div>
   )

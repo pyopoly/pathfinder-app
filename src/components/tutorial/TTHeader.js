@@ -1,10 +1,10 @@
 
-const TTHeader = () => {
+const TTHeader = ({ pages, pageNumber, totalPageNum }) => {
     return (
         <header className="tutorial-header">
-        <span className="tutorial-pages">1/2</span>
-            <h3 className="tutorial-title">Search Algorithm Visualizer</h3>
-            <h3 className="tutorial-title-description">A pathfinding visualization app</h3>
+        <span className="tutorial-pages">{pageNumber}/{totalPageNum}</span>
+            <h3 className="tutorial-title">{pages[pageNumber].title}</h3>
+            <h3 className="tutorial-title-description">{pages[pageNumber].subtitle}</h3>
         </header>
     )
 }
