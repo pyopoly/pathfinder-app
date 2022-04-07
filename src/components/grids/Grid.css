@@ -8,6 +8,8 @@
   margin-left: -1px;
   padding: 0px;
   transition: backgroud-color, 500ms;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .rows {
@@ -17,9 +19,7 @@
 
 .grid.path {
   background-color: rgb(248, 248, 192);
-  background-size: 13px;
-  background-repeat: no-repeat;
-  background-position: center;
+  background-size: 11px;
 }
 
 .grid.path.up {
@@ -41,12 +41,22 @@
 .grid.path.left:before {
   content: "";
   position: fixed;
-  width: 14px;
-  height: 14px;
+  width: 11px;
+  height: 11px;
   transform: rotate(-90deg);
-  margin: 5px 0 0 5px;
-  background-position: center;
+  margin: 7px;
   background-image: url(../../svg/arrow-up.svg);
+}
+
+
+.grid.start {
+  background-color: rgb(207, 255, 136) !important;
+  background-image: url(../../svg/start.svg);
+  background-size: 19px;
+}
+
+.goal {
+  background-image: url(../../svg/goal.svg);
 }
 
 .grid.found {
@@ -90,16 +100,4 @@
     transform: scale(1.0);
     background-color: rgba(0, 190, 218, 0.75);
   }
-}
-
-.grid.start {
-  background-color: rgb(207, 255, 136) !important;
-  background-image: url(../../svg/start.svg);
-  background-size: 19px;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.goal {
-  background-image: url(../../svg/goal.svg);
 }

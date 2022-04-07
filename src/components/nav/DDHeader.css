@@ -6,10 +6,11 @@
 .app-title {
   font-size: large;
   font-weight: bold;
-  margin: 0 15% 0 20px;
+  margin: 0 10% 0 20px;
 }
 
 .app-btns {
+  margin-left: 5%;
   display: inline-block;
 }
 
@@ -24,7 +25,7 @@
 
 .btn {
   display: inline-block;
-  background: rgba(41, 213, 240, 0.75);
+  background: rgb(31, 159, 179);
   color: #fff;
   border: none;
   padding: 8px 20px;
@@ -34,10 +35,11 @@
   text-decoration: none;
   font-size: 15px;
   font-family: inherit;
+  transition: all 500ms;
 }
 
 .btn:hover {
-  background: rgba(41, 213, 240, 0.979);
+  background: rgb(36, 190, 214);
 }
 
 /* .btn:focus {

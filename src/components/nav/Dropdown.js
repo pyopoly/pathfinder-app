@@ -2,9 +2,12 @@ import { useState, useEffect } from 'react';
 import { MdArrowDropDown } from 'react-icons/md';
 import './Dropdown.css';
 
-
+/**
+ * 
+ * @param {*} param0 
+ * @returns 
+ */
 const Dropdown = ({ title, list, callBackList }) => {
-    // const [title, setTitle] = useState("Algorithms")
     const [isListOpen, setIsListOpen] = useState(false);
     useEffect(() => {
         const handleWindowClick = () => {
