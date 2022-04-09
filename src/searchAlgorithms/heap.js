@@ -1,6 +1,5 @@
 /*
 Example usage:
-
 let h = new minHeap();
 h.add([41, "jj"], (element)=> element[0])
 h.add([16, "jj"], (element)=> element[0])

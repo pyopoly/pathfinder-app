@@ -17,12 +17,12 @@ const Page2 = () => {
             <div className="body-items">
                 <div className="sub-title-pg2">A* Search</div>
                 
-                <p className="sub-description-pg2">optimizes next node to search using heuristics and priority queue data structure.</p>
+                <p className="sub-description-pg2">optimizes next node to search using heuristics and the priority queue data structure.</p>
             </div>
             <div className="body-items">
                 <div className="sub-title-pg2">Recursive Division Maze</div>
                 
-                <p className="sub-description-pg2">Create a maze by recursively dividing the room until all rooms are divides.</p>
+                <p className="sub-description-pg2">Create a maze by recursively dividing the rooms until all rooms are divided.</p>
             </div>
         </div>
     </section>

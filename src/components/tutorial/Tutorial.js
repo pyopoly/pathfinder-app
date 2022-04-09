@@ -9,8 +9,8 @@ import Page2 from "./Page2";
 const pages = {
   1: {
     page: 1,
-    title: "Search Algorithm Visualizer",
-    subtitle: "See search algorithms in action for an easier understanding of the process.",
+    title: "Pathfinding Algorithm Visualizer",
+    subtitle: "See pathfinding algorithms in action. Choose an algorithm to begin",
     body: <Page1 />
   },
   2: {

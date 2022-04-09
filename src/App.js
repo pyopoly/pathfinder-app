@@ -2,7 +2,7 @@ import Header from "./components/nav/Header";
 import Grids from "./components/grids/Grids";
 import { useEffect, useRef, useState } from "react";
 import useWindowDimensions from "./customHooks/useWindowDimensions";
-import searchAlgo from "./searchAlgorithms/breadth-first-search";
+import searchAlgo from "./searchAlgorithms/bfSearch-dfSearch";
 import generateMaze from "./mazes/maze";
 import Dropdown from "./components/nav/Dropdown";
 import Tutorial from "./components/tutorial/Tutorial";
@@ -39,7 +39,7 @@ function App() {
   const [goalIdx, setGoalIdx] = useState(`${Math.floor(rowNumber / 2)},${Math.floor(colNumber * 4 / 6)}`);
   const appStates = [setStartIdx, setGoalIdx, startIdx, goalIdx]
 
-  const [searchAlgoName, setSearchAlgoName] = useState("Choose Algorithm");
+  const [searchAlgoName, setSearchAlgoName] = useState("Visualize Algorithm");
   const [mazeAlgoName, setMazeAlgoName] = useState("Mazes");
   const [showTutorial, setShowTutorial] = useState(true);
 
