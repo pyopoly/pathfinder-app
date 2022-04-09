@@ -45,7 +45,7 @@
 
 
 .grid.start {
-  background-color: rgb(207, 255, 136) !important;
+  background-color: rgb(207, 255, 136);
   background-image: url(../../svg/start.svg);
   background-size: 19px;
 }
@@ -64,6 +64,8 @@
 }
 
 .visited {
+  position: relative;
+  z-index: -1;
   border: 1px solid rgb(175, 216, 248);
   animation-name: visitedAnimation;
   animation-duration: 1.5s;
@@ -73,28 +75,6 @@
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
   animation-play-state: running;
-}
-
-@keyframes visitedAnimation {
-  0% {
-    transform: scale(.3);
-    background-color: rgba(0, 0, 66, 0.75);
-    border-radius: 100%;
-  }
-
-  50% {
-    background-color: rgba(17, 104, 217, 0.75);
-  }
-
-  75% {
-    transform: scale(1.2);
-    background-color: rgba(0, 217, 159, 0.75)
-  }
-
-  100% {
-    transform: scale(1.0);
-    background-color: rgba(0, 190, 218, 0.75);
-  }
 }
 
 @keyframes visitedAnimation {
