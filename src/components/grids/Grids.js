@@ -4,7 +4,6 @@ import { useRef } from 'react';
 
 
 const Grids = ({ board, appStates, rowNumber, colNumber }) => {
-    // console.log('grids re-render')
     const mousedownRef = useRef(false)
     const gridIcon = useRef("wall")
 

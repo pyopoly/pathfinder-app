@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './Grid.css';
 
-const Grid = ({ children, board, gridIdx, mousedownRef, gridIconRef: iconRef, appStates: [setStartIdx, setGoalIdx, startIdx, goalIdx], initStatus="unvisited", initIcon=null }) => {
+const Grid = ({board, gridIdx, mousedownRef, gridIconRef: iconRef, appStates: [setStartIdx, setGoalIdx, startIdx, goalIdx], initStatus="unvisited", initIcon=null }) => {
   const [gridStatus, setGridStatus] = useState(initStatus);
   const [icon, setIcon] = useState(initIcon);
 
@@ -10,7 +10,7 @@ const Grid = ({ children, board, gridIdx, mousedownRef, gridIconRef: iconRef, ap
       status: gridStatus,
       setStatus: setGridStatus,
       icon: icon,
-      setIcon: setIcon
+      setIcon: setIcon,
     }
 
   const handleMouseDown = () => {
@@ -62,9 +62,7 @@ const Grid = ({ children, board, gridIdx, mousedownRef, gridIconRef: iconRef, ap
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseOver={handleMouseOver}
-    >
-      {children}
-    </div>
+    />
   )
 }
 

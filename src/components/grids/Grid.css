@@ -29,15 +29,11 @@
   background-image: url(../../svg/arrow-right.svg);
 }
 
-.grid.path.up {
-  background-image: url(../../svg/arrow-up.svg);
-}
-
 .grid.path.down {
   background-image: url(../../svg/arrow-down.svg);
 }
 
-.grid.path.left:before {
+.grid.path.left::before {
   content: "";
   position: fixed;
   width: 11px;
