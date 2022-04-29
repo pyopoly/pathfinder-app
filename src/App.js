@@ -45,7 +45,7 @@ function App() {
 
   const board = useRef(createGridBoard(rowNumber, colNumber)).current;
 
-
+console.log("app")
   useEffect(() => {
     setStartIdx(`${Math.floor(rowNumber / 2)},${Math.floor(colNumber * 2 / 6)}`)
     setGoalIdx(`${Math.floor(rowNumber / 2)},${Math.floor(colNumber * 4 / 6)}`)
